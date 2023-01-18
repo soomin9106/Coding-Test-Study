@@ -17,14 +17,13 @@ def solution(arr, c, st, end):
     if c == 2:
         return end
 
-    ct = 0
-
     while st <= end:
         mid = (st + end) // 2
         cur = arr[0]
+        ct = 1
 
         for i in range(len(arr)):
-            if arr[i] - cur > mid:
+            if arr[i] - cur >= mid:
                 ct += 1
                 cur = arr[i]
 

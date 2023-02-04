@@ -13,9 +13,8 @@
 1 1 2
 """
 
-def solution(units):
+def my_solution(units):
     target = 1
-    units.sort()
 
     if target < units[0]:
         return target
@@ -45,10 +44,23 @@ def solution(units):
 
     return total + 1
 
+def solution(units):
+    target = 1
+
+    for u in units:
+        if target < u:
+            break
+        
+        target += u
+    
+    return(target)
+
 def main():
     n = int(input())
     units = list(map(int, input().split()))
+    units.sort()
 
-    print(solution(units))
+    print("mine:", my_solution(units))
+    print("sol:", solution(units))
 
 main()

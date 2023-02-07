@@ -30,7 +30,7 @@
 """
 from collections import deque
 
-def solution(arr, low, high, st):
+def solution(st):
     n = len(arr)
     dx = [-1, 1, 0, 0]
     dy = [0, 0, -1, 1]
@@ -56,14 +56,16 @@ def solution(arr, low, high, st):
 
             if not visited[nx][ny]:
                 queue.append((nx, ny))
-                visited[nx][ny] = True
+                # visited[nx][ny] = True
             
-            # 이웃한 나라의 인구 수 차이가 범위 안일 때
-            if low <= abs(arr[x][y] - arr[nx][ny]) <= high:
-                # print(f"nx: {nx}  ny: {ny}")
-                # print(list(queue))
-                union.add((x, y))
-                union.add((nx, ny))
+                # 이웃한 나라의 인구 수 차이가 범위 안일 때
+                if low <= abs(arr[x][y] - arr[nx][ny]) <= high:
+                    # print(f"nx: {nx}  ny: {ny}")
+                    # print(list(queue))
+                    # visited[nx][ny] = True
+                    # queue.append((nx, ny))
+                    union.add((x, y))
+                    union.add((nx, ny))
                 
     if not union:
         return False
@@ -80,14 +82,22 @@ def solution(arr, low, high, st):
     
     return True
 
-
+    
 n, low, high = map(int, input().split())
+
+visited = [[False] * n for _ in range(n)]
 
 arr = [list(map(int, input().split())) for _ in range(n)]
 
 ct = 0
-while solution(arr, low, high, (0, 0)):
+while solution((0, 0)):
     print(arr)
     ct += 1
+
+# for i in range(n):
+#     for j in range(n):
+#         if solution((i, j)):
+#             print(arr)
+#             ct += 1
 
 print(ct)
